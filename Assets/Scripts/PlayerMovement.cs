@@ -5,22 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    // Variables for player movemnt
     public Camera playerCamera;
-    public float walkSpeed = 6f;
-    public float runSpeed = 12f;
-    public float jumpPower = 7f;
-    public float gravity = 10f;
-    public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
-    public float defaultHeight = 2f;
-    public float crouchHeight = 1f;
-    public float crouchSpeed = 3f;
+    [SerializeField] public float walkSpeed;
+    private float initialWalkSpeed;
+    [SerializeField] public float runSpeed;
+    private float initialRunSpeed;
+    [SerializeField] public float jumpPower;
+    [SerializeField] public float gravity;
+    [SerializeField] public float lookSpeed;
+    [SerializeField] public float lookXLimit;
+    [SerializeField] public float defaultHeight;
+    [SerializeField] public float crouchHeight;
+    [SerializeField] public float crouchSpeed;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
     private CharacterController characterController;
 
     private bool canMove = true;
+
+    private void Awake()
+    {
+        initialWalkSpeed = walkSpeed;
+        initialRunSpeed = runSpeed;
+    }
 
     void Start()
     {
@@ -64,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
+            walkSpeed = initialWalkSpeed;
+            runSpeed = initialRunSpeed;
         }
 
         characterController.Move(moveDirection * Time.deltaTime);
