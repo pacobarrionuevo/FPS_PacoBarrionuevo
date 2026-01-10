@@ -40,6 +40,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Movement();
+
+        Crouch();
+
+        LookAround();
+    }
+
+    private void Movement()
+    {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -63,7 +72,12 @@ public class PlayerMovement : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.R) && canMove)
+        characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void Crouch()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && canMove)
         {
             characterController.height = crouchHeight;
             walkSpeed = crouchSpeed;
@@ -76,9 +90,10 @@ public class PlayerMovement : MonoBehaviour
             walkSpeed = initialWalkSpeed;
             runSpeed = initialRunSpeed;
         }
+    }
 
-        characterController.Move(moveDirection * Time.deltaTime);
-
+    private void LookAround()
+    {
         if (canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
