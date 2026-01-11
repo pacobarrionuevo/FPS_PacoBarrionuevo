@@ -30,6 +30,9 @@ public class WeaponScriptableObject : ScriptableObject
         model.transform.SetParent(parent, false);
         model.transform.localPosition = spawnPoint;
         model.transform.localRotation = Quaternion.Euler(spawnRotation);
+
+        shootSystem = model.GetComponentInChildren<ParticleSystem>();
+        Debug.Log(shootSystem);
     }
 
     public void Shoot()

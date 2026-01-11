@@ -655,6 +655,8 @@ GameObject:
   - component: {fileID: 942575802}
   - component: {fileID: 942575804}
   - component: {fileID: 942575803}
+  - component: {fileID: 942575805}
+  - component: {fileID: 942575806}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -726,6 +728,36 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &942575805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942575801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 755da567c7219cc409ebd63def980794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: 0
+  weaponParent: {fileID: 330585546}
+  weapons:
+  - {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
+  activeWeapon: {fileID: 0}
+--- !u!114 &942575806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942575801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c11e5fa2e64ad4592b210a239dca70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSelector: {fileID: 942575805}
 --- !u!1 &1055361762
 GameObject:
   m_ObjectHideFlags: 0
