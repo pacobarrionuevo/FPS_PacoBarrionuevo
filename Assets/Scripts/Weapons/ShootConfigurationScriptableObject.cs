@@ -15,7 +15,7 @@ public class ShootConfigurationScriptableObject : ScriptableObject
     public float recoilRecoverySpeed = 1f;
     public float maxSpreadTime = 1f;
 
-    public BulletSpreadType bulletSpreadType = BulletSpreadType.None;
+    public BulletSpreadType bulletSpreadType = BulletSpreadType.Simple;
 
     // The spread makes the bullet not to travel in a predictable straight line
     [Header("Simple Spread")]

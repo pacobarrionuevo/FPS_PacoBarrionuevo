@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   name_: Pistol
-  modelPrefab: {fileID: 7021688876078599006, guid: 8e811d18d0a2092488a11fea7bdf439a, type: 3}
-  spawnPoint: {x: 0.58, y: -0.2, z: 0.6904638}
+  modelPrefab: {fileID: 3459169721893305968, guid: a6e3cf3ee947ca74197a9a3bd8f46581, type: 3}
+  spawnPoint: {x: 0.29, y: -0.1, z: 0.42}
   spawnRotation: {x: 0, y: 0, z: 0}
   shootConfig: {fileID: 11400000, guid: bb6a87c4bfae1e94d8dfad6415bfe011, type: 2}
   trailConfig: {fileID: 11400000, guid: 6daec52d31c9b004c973ca842715b927, type: 2}
