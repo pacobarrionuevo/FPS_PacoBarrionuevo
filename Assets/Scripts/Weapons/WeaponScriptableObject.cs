@@ -13,6 +13,7 @@ public class WeaponScriptableObject : ScriptableObject
 
     public ShootConfigurationScriptableObject shootConfig;
     public TrailConfigurationScriptableObject trailConfig;
+    public DamageConfigScriptableObject damageConfig;
 
     private MonoBehaviour activeMonoBehaviour;
     private GameObject model;
@@ -132,6 +133,14 @@ public class WeaponScriptableObject : ScriptableObject
         }
 
         instance.transform.position = endPoint;
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damageConfig.GetDamage(distance));
+            }
+        }
 
         yield return new WaitForSeconds(trailConfig.duration);
         yield return null;
