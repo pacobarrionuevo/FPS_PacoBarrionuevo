@@ -17,6 +17,11 @@ public class WeaponScriptableObject : ScriptableObject
     private MonoBehaviour activeMonoBehaviour;
     private GameObject model;
     private float lastShootTime;
+
+    private float initialClickTime;
+    private float stopShootingTime;
+    private bool lastFrameWantedToShoot;
+
     private ParticleSystem shootSystem;
     private ObjectPool<TrailRenderer> trailPool;
 
@@ -37,16 +42,29 @@ public class WeaponScriptableObject : ScriptableObject
 
     public void Shoot()
     {
+        if (Time.time - shootConfig.fireRate - lastShootTime > Time.deltaTime)
+        {
+            float lastDuration = Mathf.Clamp(
+                0,
+                (stopShootingTime - initialClickTime),
+                shootConfig.maxSpreadTime
+            );
+
+            float lerpTime = (shootConfig.recoilRecoverySpeed - (Time.time - stopShootingTime))
+                                / shootConfig.recoilRecoverySpeed;
+
+            initialClickTime = Time.time - Mathf.Lerp(0, lastDuration, Mathf.Clamp01(lerpTime));
+        }
+
         if (Time.time > shootConfig.fireRate + lastShootTime)
         {
             lastShootTime = Time.time;
             shootSystem.Play();
-            Vector3 shootDirection = shootSystem.transform.forward
-                 + new Vector3(Random.Range(-shootConfig.Spread.x, shootConfig.Spread.x),
-                 Random.Range(-shootConfig.Spread.y, shootConfig.Spread.y),
-                 Random.Range(-shootConfig.Spread.z, shootConfig.Spread.z));
 
-            shootDirection.Normalize();
+            Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
+            model.transform.forward += model.transform.TransformDirection(spreadAmount);
+
+            Vector3 shootDirection = model.transform.forward;
 
             if (Physics.Raycast (
                 shootSystem.transform.position,
@@ -65,6 +83,26 @@ public class WeaponScriptableObject : ScriptableObject
                     shootSystem.transform.position + (shootDirection * trailConfig.missDistance), 
                     new RaycastHit()));
             }
+        }
+    }
+
+    public void Tick(bool WantsToShoot)
+    {
+        model.transform.localRotation = Quaternion.Lerp(
+            model.transform.localRotation,
+            Quaternion.Euler(spawnRotation),
+            Time.deltaTime * shootConfig.recoilRecoverySpeed
+        );
+
+        if (WantsToShoot)
+        {
+            lastFrameWantedToShoot = true;
+            Shoot();
+        }
+        else if (!WantsToShoot && lastFrameWantedToShoot) 
+        {
+            stopShootingTime = Time.time;
+            lastFrameWantedToShoot = false;
         }
     }
 

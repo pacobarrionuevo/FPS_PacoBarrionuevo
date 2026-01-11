@@ -7,9 +7,9 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current.leftButton.isPressed && weaponSelector.activeWeapon != null)
+        if (weaponSelector.activeWeapon != null)
         {
-            weaponSelector.activeWeapon.Shoot();
+            weaponSelector.activeWeapon.Tick(Mouse.current.leftButton.isPressed);
         }
     }
 }
