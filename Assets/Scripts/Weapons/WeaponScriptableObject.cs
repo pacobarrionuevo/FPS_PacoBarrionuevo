@@ -15,6 +15,10 @@ public class WeaponScriptableObject : ScriptableObject
     public TrailConfigurationScriptableObject trailConfig;
     public DamageConfigScriptableObject damageConfig;
 
+    [SerializeField] public int maxAmmo;
+    [SerializeField] public int currentAmmo;
+    private bool canShoot;
+
     private MonoBehaviour activeMonoBehaviour;
     private GameObject model;
     private float lastShootTime;
@@ -26,12 +30,18 @@ public class WeaponScriptableObject : ScriptableObject
     private ParticleSystem shootSystem;
     private ObjectPool<TrailRenderer> trailPool;
 
+    public void Awake()
+    {
+        currentAmmo = maxAmmo;
+        canShoot = true;
+    }
+
     public void Spawn(Transform parent, MonoBehaviour activeMonobehaviour)
     {
         this.activeMonoBehaviour = activeMonobehaviour;
         lastShootTime = 0;
         trailPool = new ObjectPool<TrailRenderer>(CreateTail);
-
+        
         model = Instantiate(modelPrefab);
         model.transform.SetParent(parent, false);
         model.transform.localPosition = spawnPoint;
@@ -43,48 +53,62 @@ public class WeaponScriptableObject : ScriptableObject
 
     public void Shoot()
     {
-        if (Time.time - shootConfig.fireRate - lastShootTime > Time.deltaTime)
+        if (currentAmmo > 0)
         {
-            float lastDuration = Mathf.Clamp(
-                0,
-                (stopShootingTime - initialClickTime),
-                shootConfig.maxSpreadTime
-            );
-
-            float lerpTime = (shootConfig.recoilRecoverySpeed - (Time.time - stopShootingTime))
-                                / shootConfig.recoilRecoverySpeed;
-
-            initialClickTime = Time.time - Mathf.Lerp(0, lastDuration, Mathf.Clamp01(lerpTime));
+            canShoot = true;
+        } 
+        else
+        {
+            canShoot = false;
         }
 
-        if (Time.time > shootConfig.fireRate + lastShootTime)
+        if (canShoot)
         {
-            lastShootTime = Time.time;
-            shootSystem.Play();
-
-            Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
-            model.transform.forward += model.transform.TransformDirection(spreadAmount);
-
-            Vector3 shootDirection = model.transform.forward;
-
-            if (Physics.Raycast (
-                shootSystem.transform.position,
-                shootDirection,
-                out RaycastHit hit,
-                float.MaxValue,
-                shootConfig.HitMask))
+            if (Time.time - shootConfig.fireRate - lastShootTime > Time.deltaTime)
             {
-                // if it hits an enemy
-                activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position, hit.point, hit));
+                float lastDuration = Mathf.Clamp(
+                    0,
+                    (stopShootingTime - initialClickTime),
+                    shootConfig.maxSpreadTime
+                );
+
+                float lerpTime = (shootConfig.recoilRecoverySpeed - (Time.time - stopShootingTime))
+                                    / shootConfig.recoilRecoverySpeed;
+
+                initialClickTime = Time.time - Mathf.Lerp(0, lastDuration, Mathf.Clamp01(lerpTime));
             }
-            else
+
+            if (Time.time > shootConfig.fireRate + lastShootTime)
             {
-                // if it misses an enemy
-                activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position,
-                    shootSystem.transform.position + (shootDirection * trailConfig.missDistance), 
-                    new RaycastHit()));
+                lastShootTime = Time.time;
+                currentAmmo--;
+                shootSystem.Play();
+
+                Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
+                model.transform.forward += model.transform.TransformDirection(spreadAmount);
+
+                Vector3 shootDirection = model.transform.forward;
+
+                if (Physics.Raycast(
+                    shootSystem.transform.position,
+                    shootDirection,
+                    out RaycastHit hit,
+                    float.MaxValue,
+                    shootConfig.HitMask))
+                {
+                    // if it hits an enemy
+                    activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position, hit.point, hit));
+                }
+                else
+                {
+                    // if it misses an enemy
+                    activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position,
+                        shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
+                        new RaycastHit()));
+                }
             }
         }
+        
     }
 
     public void Tick(bool WantsToShoot)
