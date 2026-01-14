@@ -255,7 +255,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70.9
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -561,6 +561,102 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &496520768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496520769}
+  m_Layer: 0
+  m_Name: Ammo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496520769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496520768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.75364, y: 1.8145447, z: -0.5999895}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 739624316}
+  - {fileID: 703013189}
+  - {fileID: 548976105}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &548976104
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 496520769}
+    m_Modifications:
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.598791
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8145447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.2022705
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234981413217027606, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_Name
+      value: AmmoPowerUp (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+--- !u!4 &548976105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+  m_PrefabInstance: {fileID: 548976104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &678054653
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +864,73 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &703013188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 496520769}
+    m_Modifications:
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.1538815
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8145447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9517613
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234981413217027606, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_Name
+      value: AmmoPowerUp (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+--- !u!4 &703013189 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+  m_PrefabInstance: {fileID: 703013188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &739624316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+  m_PrefabInstance: {fileID: 8306244626278225175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,6 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSelector: {fileID: 942575805}
+  weaponScriptableObject: {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
 --- !u!1 &1055361762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2186,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &8306244626278225175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 496520769}
+    m_Modifications:
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.87636
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8145447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5999895
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463651652745993388, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234981413217027606, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
+      propertyPath: m_Name
+      value: AmmoPowerUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c930d526add87b44daea215a6b1b7b49, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2039,3 +2260,4 @@ SceneRoots:
   - {fileID: 678054657}
   - {fileID: 847263852}
   - {fileID: 2051599611}
+  - {fileID: 496520769}
