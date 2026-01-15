@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Weapon", order = 0)]
@@ -84,7 +85,17 @@ public class WeaponScriptableObject : ScriptableObject
                 currentAmmo--;
                 shootSystem.Play();
 
-                Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
+                if (currentAmmo > 11)
+                {
+                    AudioManager.Instance.PlayPistolShootingSound();
+                }
+                else
+                {
+                    AudioManager.Instance.PlayPistolEmptyingSound();
+                }
+
+
+                    Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
                 model.transform.forward += model.transform.TransformDirection(spreadAmount);
 
                 Vector3 shootDirection = model.transform.forward;
@@ -106,6 +117,13 @@ public class WeaponScriptableObject : ScriptableObject
                         shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
                         new RaycastHit()));
                 }
+            }
+        }
+        else
+        {
+            if (Mouse.current.leftButton.isPressed)
+            {
+                AudioManager.Instance.PlayEmptyGunSound();
             }
         }
         

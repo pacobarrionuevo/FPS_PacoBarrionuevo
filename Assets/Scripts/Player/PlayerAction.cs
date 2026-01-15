@@ -19,12 +19,8 @@ public class PlayerAction : MonoBehaviour
         if (other.CompareTag("AmmoClip"))
         {
             weaponScriptableObject.currentAmmo = weaponScriptableObject.maxAmmo;
+            AudioManager.Instance.PlayReloadAmmoSound();
             Destroy(other.gameObject);
         }
-    }
-
-    private void AmmoClip(Collider c)
-    {
-        
     }
 }
