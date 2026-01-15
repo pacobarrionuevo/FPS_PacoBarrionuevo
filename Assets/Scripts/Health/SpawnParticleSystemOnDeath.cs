@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(IDamageable))]
 public class SpawnParticleSystemOnDeath : MonoBehaviour
 {
+    [SerializeField] public GameObject gameObject;
     [SerializeField] private ParticleSystem deathSystem;
     public IDamageable damageable;
 
@@ -19,5 +20,6 @@ public class SpawnParticleSystemOnDeath : MonoBehaviour
     private void DamageableOnDeath(Vector3 position)
     {
         Instantiate(deathSystem, position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

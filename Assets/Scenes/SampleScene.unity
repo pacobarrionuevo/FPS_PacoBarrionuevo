@@ -836,6 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ff0b3265c37964aac8303392c3895b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObject: {fileID: 678054653}
   deathSystem: {fileID: 4416957079114657532, guid: f25a4609486f48649840374c32725139, type: 3}
 --- !u!54 &678054663
 Rigidbody:
