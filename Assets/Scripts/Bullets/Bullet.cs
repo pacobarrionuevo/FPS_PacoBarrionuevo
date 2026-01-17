@@ -5,15 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody rb;
-    [field: SerializeField]
-    public Vector3 SpawnLocation
-    {
-        get;
-        private set;
-    }
+    public Rigidbody rb { get; private set; }
+    [field: SerializeField] public Vector3 SpawnLocation { get; private set; }
 
-    [SerializeField] private float delayedDisableTime = 2f;
+    [field: SerializeField] public Vector3 SpawnVelocity { get; private set; }
 
     public delegate void CollisionEvent(Bullet bullet, Collision collision);
     public event CollisionEvent OnCollision;
@@ -28,11 +23,13 @@ public class Bullet : MonoBehaviour
         SpawnLocation = transform.position;
         transform.forward = SpawnForce.normalized;
         rb.AddForce(SpawnForce);
-        StartCoroutine(DelayedDisable(delayedDisableTime));
+        SpawnVelocity = SpawnForce * Time.fixedDeltaTime / rb.mass;
+        StartCoroutine(DelayedDisable(2));
     }
 
     private IEnumerator DelayedDisable(float Time)
     {
+        yield return null;
         yield return new WaitForSeconds(Time);
         OnCollisionEnter(null);
     }
