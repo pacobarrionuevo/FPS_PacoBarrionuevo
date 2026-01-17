@@ -1480,10 +1480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755da567c7219cc409ebd63def980794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: 2
+  weapon: 1
   weaponParent: {fileID: 330585546}
   weapons:
-  - {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
+  - {fileID: 11400000, guid: a093c97f1d5b33241abf7301bc61ebe8, type: 2}
   activeWeapon: {fileID: 0}
 --- !u!114 &942575806
 MonoBehaviour:
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSelector: {fileID: 942575805}
-  weaponScriptableObject: {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
+  weaponScriptableObject: {fileID: 11400000, guid: a093c97f1d5b33241abf7301bc61ebe8, type: 2}
 --- !u!1 &1055361762
 GameObject:
   m_ObjectHideFlags: 0

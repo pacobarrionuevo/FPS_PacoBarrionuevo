@@ -92,7 +92,7 @@ public class WeaponScriptableObject : ScriptableObject
                 currentAmmo--;
                 shootSystem.Play();
 
-                if (currentAmmo > 11)
+                if (currentAmmo > 3)
                 {
                     AudioManager.Instance.PlayPistolShootingSound();
                 }
@@ -101,20 +101,22 @@ public class WeaponScriptableObject : ScriptableObject
                     AudioManager.Instance.PlayPistolEmptyingSound();
                 }
 
-
-                Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
-                model.transform.forward += model.transform.TransformDirection(spreadAmount);
-
-                Vector3 shootDirection = model.transform.forward;
-
-                if (shootConfig.isHitscan)
+                for (int i = 0; i < shootConfig.bulletsPerShot; i++)
                 {
-                    HitScanShooting(shootDirection);
-                }
-                else if (!shootConfig.isHitscan)
-                {
-                    ProjectileShooting(shootDirection);
-                }
+                    Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
+                    model.transform.forward += model.transform.TransformDirection(spreadAmount);
+
+                    Vector3 shootDirection = model.transform.forward;
+
+                    if (shootConfig.isHitscan)
+                    {
+                        HitScanShooting(shootDirection);
+                    }
+                    else if (!shootConfig.isHitscan)
+                    {
+                        ProjectileShooting(shootDirection);
+                    }
+                } 
             }
         }
         else

@@ -19,11 +19,15 @@ public class ShootConfigurationScriptableObject : ScriptableObject
     public float recoilRecoverySpeed = 1f;
     public float maxSpreadTime = 1f;
 
+    public int bulletsPerShot = 1;
+
     public BulletSpreadType bulletSpreadType = BulletSpreadType.Simple;
 
     // The spread makes the bullet not to travel in a predictable straight line
     [Header("Simple Spread")]
     public Vector3 Spread = new Vector3(0.1f, 0.1f, 0.1f);
+
+    public Vector3 MinSpread = Vector3.zero;
 
     public Vector3 GetSpread(float shootTime = 0)
     {
@@ -32,7 +36,9 @@ public class ShootConfigurationScriptableObject : ScriptableObject
         if (bulletSpreadType == BulletSpreadType.Simple)
         {
             spread = Vector3.Lerp(
-                Vector3.zero,
+                new Vector3(Random.Range(-MinSpread.x, MinSpread.x),
+                     Random.Range(-MinSpread.y, MinSpread.y),
+                     Random.Range(-MinSpread.z, MinSpread.z)),
                 new Vector3(Random.Range(-Spread.x, Spread.x),
                      Random.Range(-Spread.y, Spread.y),
                      Random.Range(-Spread.z, Spread.z)), 
