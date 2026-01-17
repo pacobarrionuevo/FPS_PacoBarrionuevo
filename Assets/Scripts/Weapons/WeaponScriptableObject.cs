@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Weapon", order = 0)]
 public class WeaponScriptableObject : ScriptableObject
@@ -30,6 +31,7 @@ public class WeaponScriptableObject : ScriptableObject
 
     private ParticleSystem shootSystem;
     private ObjectPool<TrailRenderer> trailPool;
+    private ObjectPool<Bullet> bulletPool;
 
     public void Awake()
     {
@@ -42,6 +44,11 @@ public class WeaponScriptableObject : ScriptableObject
         this.activeMonoBehaviour = activeMonobehaviour;
         lastShootTime = 0;
         trailPool = new ObjectPool<TrailRenderer>(CreateTail);
+
+        if (!shootConfig.isHitscan)
+        {
+            bulletPool = new ObjectPool<Bullet>(CreateBullet);
+        }
         
         model = Instantiate(modelPrefab);
         model.transform.SetParent(parent, false);
@@ -95,27 +102,18 @@ public class WeaponScriptableObject : ScriptableObject
                 }
 
 
-                    Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
+                Vector3 spreadAmount = shootConfig.GetSpread(Time.time - initialClickTime);
                 model.transform.forward += model.transform.TransformDirection(spreadAmount);
 
                 Vector3 shootDirection = model.transform.forward;
 
-                if (Physics.Raycast(
-                    shootSystem.transform.position,
-                    shootDirection,
-                    out RaycastHit hit,
-                    float.MaxValue,
-                    shootConfig.HitMask))
+                if (shootConfig.isHitscan)
                 {
-                    // if it hits an enemy
-                    activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position, hit.point, hit));
+                    HitScanShooting(shootDirection);
                 }
-                else
+                else if (!shootConfig.isHitscan)
                 {
-                    // if it misses an enemy
-                    activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position,
-                        shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
-                        new RaycastHit()));
+                    ProjectileShooting(shootDirection);
                 }
             }
         }
@@ -178,10 +176,7 @@ public class WeaponScriptableObject : ScriptableObject
 
         if (hit.collider != null)
         {
-            if (hit.collider.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(damageConfig.GetDamage(distance));
-            }
+            HandleBulletImpact(distance, endPoint, hit.normal, hit.collider);
         }
 
         yield return new WaitForSeconds(trailConfig.duration);
@@ -206,5 +201,97 @@ public class WeaponScriptableObject : ScriptableObject
         trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         return trail;
+    }
+
+    private Bullet CreateBullet()
+    {
+        return Instantiate(shootConfig.bulletPrefab);
+    }
+
+    private void HitScanShooting(Vector3 shootDirection)
+    {
+        if (Physics.Raycast(
+                    shootSystem.transform.position,
+                    shootDirection,
+                    out RaycastHit hit,
+                    float.MaxValue,
+                    shootConfig.HitMask))
+        {
+            // if it hits an enemy
+            activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position, hit.point, hit));
+        }
+        else
+        {
+            // if it misses an enemy
+            activeMonoBehaviour.StartCoroutine(PlayTrail(shootSystem.transform.position,
+                shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
+                new RaycastHit()));
+        }
+    }
+
+    private void ProjectileShooting(Vector3 shootDirection)
+    {
+        Bullet bullet = bulletPool.Get();
+        bullet.gameObject.SetActive(true);
+        bullet.OnCollision += HandleBulletCollision;
+        bullet.transform.position = shootSystem.transform.position;
+        bullet.Spawn(shootDirection * shootConfig.bulletSpawnForce);
+
+        TrailRenderer trail = trailPool.Get();
+
+        if (trail != null)
+        {
+            trail.transform.SetParent(bullet.transform, false);
+            trail.transform.localPosition = Vector3.zero;
+            trail.emitting = true;
+            trail.gameObject.SetActive(true);
+        }
+    }
+
+    private void HandleBulletCollision(Bullet bullet, Collision collision)
+    {
+        TrailRenderer trail = bullet.GetComponentInChildren<TrailRenderer>();
+
+        if (trail != null)
+        {
+            trail.transform.SetParent(null, true);
+            activeMonoBehaviour.StartCoroutine(DelayedDisableTrail(trail));
+        }
+
+        bullet.gameObject.SetActive(false);
+        bulletPool.Release(bullet);
+
+        if (collision != null)
+        {
+            ContactPoint contactPoint = collision.GetContact(0);
+
+            HandleBulletImpact(
+                Vector3.Distance(contactPoint.point, bullet.SpawnLocation),
+                contactPoint.point,
+                contactPoint.normal,
+                contactPoint.otherCollider
+            );
+        }
+    }
+
+    private void HandleBulletImpact(
+        float distanceTravelled, 
+        Vector3 HitLocation, 
+        Vector3 HitNormal,
+        Collider HitCollider)
+    {
+        if (HitCollider.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(damageConfig.GetDamage(distanceTravelled));
+        }
+    }
+
+    private IEnumerator DelayedDisableTrail(TrailRenderer trail)
+    {
+        yield return new WaitForSeconds(trailConfig.duration);
+        yield return null;
+        trail.emitting = false;
+        trail.gameObject.SetActive(false);
+        trailPool.Release(trail);
     }
 }

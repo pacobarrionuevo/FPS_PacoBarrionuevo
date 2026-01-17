@@ -1399,7 +1399,7 @@ GameObject:
   - component: {fileID: 942575806}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1480,10 +1480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755da567c7219cc409ebd63def980794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: 0
+  weapon: 2
   weaponParent: {fileID: 330585546}
   weapons:
-  - {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
+  - {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
   activeWeapon: {fileID: 0}
 --- !u!114 &942575806
 MonoBehaviour:
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSelector: {fileID: 942575805}
-  weaponScriptableObject: {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
+  weaponScriptableObject: {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
 --- !u!1 &1055361762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2174,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 120
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

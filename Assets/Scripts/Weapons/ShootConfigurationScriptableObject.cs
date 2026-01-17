@@ -6,6 +6,10 @@ public class ShootConfigurationScriptableObject : ScriptableObject
 {
     // How the gun shoots
 
+    public bool isHitscan;
+    public Bullet bulletPrefab;
+    public float bulletSpawnForce = 1000f;
+
     // The layer mask where the raycast will hit on
     public LayerMask HitMask;
 

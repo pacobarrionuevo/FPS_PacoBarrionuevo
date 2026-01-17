@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e57e3e8d46afbe46876e568ce8ace21, type: 3}
+  m_Name: RocketLauncher
+  m_EditorClassIdentifier: 
+  type: 2
+  name_: RocketLauncher
+  modelPrefab: {fileID: 2893870274590104011, guid: bd5cf643a1274304fa3320d81cf9b312, type: 3}
+  spawnPoint: {x: 0.44, y: -0.2, z: 0.27}
+  spawnRotation: {x: 0, y: 180, z: 0}
+  shootConfig: {fileID: 11400000, guid: 204fd7c4521145e4db1ac445d6f162bb, type: 2}
+  trailConfig: {fileID: 11400000, guid: 1ac5d22074cf9774698e3400e120ec8e, type: 2}
+  damageConfig: {fileID: 11400000, guid: 5c6752e51dd3d6e4da0e6f002bea94e7, type: 2}
+  maxAmmo: 10
+  currentAmmo: 8

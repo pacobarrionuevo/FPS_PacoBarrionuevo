@@ -3,5 +3,6 @@
 public enum WeaponType
 {
     Pistol,
-    Shotgun
+    Shotgun,
+    RocketLauncher
 }
