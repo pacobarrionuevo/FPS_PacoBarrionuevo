@@ -6,12 +6,14 @@ public class PrefabManager : MonoBehaviour
 {
     public GameObject powerup;
     public static PrefabManager prefabManager;
-    private Tweener tween;
     public bool isInfiniteAmmoActive = false;
+    private ParticleSystem particleSystem_;
 
     public void Awake()
     {
         prefabManager = this;
+        particleSystem_ = powerup.GetComponentInChildren<ParticleSystem>();
+        DOTween.SetTweensCapacity(1000000, 1000000);
     }
 
     public void Update()
@@ -24,6 +26,7 @@ public class PrefabManager : MonoBehaviour
 
     public void ReloadAmmo(WeaponScriptableObject weaponScriptableObject, Collider other)
     {
+        particleSystem_.Play();
         weaponScriptableObject.currentAmmo = weaponScriptableObject.maxAmmo;
         AudioManager.Instance.PlayReloadAmmoSound();
         if (powerup != null)
@@ -36,6 +39,7 @@ public class PrefabManager : MonoBehaviour
 
     public IEnumerator InfiniteAmmo(WeaponScriptableObject weaponScriptableObject, Collider other)
     {
+        particleSystem_.Play();
         isInfiniteAmmoActive = true;
         AudioManager.Instance.PlayReloadAmmoSound();
         if (powerup != null)
@@ -54,15 +58,11 @@ public class PrefabManager : MonoBehaviour
 
     public void RotateObject()
     {
-        DOTween.SetTweensCapacity(10000, 10000);
 
         if (powerup == null) return;
 
-        if (tween == null || !tween.IsPlaying())
-        {
-            tween = powerup.transform.DORotate(new Vector3(0f, 45, 0f), 1.5f, RotateMode.LocalAxisAdd)
-                       .SetLoops(-1);
-        }
+        powerup.transform.DORotate(new Vector3(0f, 45, 0f), 1.5f, RotateMode.LocalAxisAdd).SetLoops(-1);
+
     }
 
     void OnDestroy()
