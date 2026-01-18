@@ -56,7 +56,6 @@ public class WeaponScriptableObject : ScriptableObject
         model.transform.localRotation = Quaternion.Euler(spawnRotation);
 
         shootSystem = model.GetComponentInChildren<ParticleSystem>();
-        Debug.Log(shootSystem);
     }
 
     public void Shoot()
@@ -116,7 +115,7 @@ public class WeaponScriptableObject : ScriptableObject
                     {
                         ProjectileShooting(shootDirection);
                     }
-                } 
+                }
             }
         }
         else
