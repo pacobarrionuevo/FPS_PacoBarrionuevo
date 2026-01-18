@@ -198,8 +198,8 @@ GameObject:
   - component: {fileID: 109259481}
   - component: {fileID: 109259480}
   - component: {fileID: 109259479}
-  - component: {fileID: 109259478}
   - component: {fileID: 109259477}
+  - component: {fileID: 109259483}
   m_Layer: 5
   m_Name: WeaponWheelButton (2)
   m_TagString: Untagged
@@ -244,7 +244,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 109259478}
+        - m_Target: {fileID: 109259483}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverEnter
           m_Mode: 1
@@ -260,7 +260,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 109259478}
+        - m_Target: {fileID: 109259483}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverExit
           m_Mode: 1
@@ -276,7 +276,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 109259478}
+        - m_Target: {fileID: 109259483}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Selected
           m_Mode: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 109259478}
+        - m_Target: {fileID: 109259483}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Deselected
           m_Mode: 1
@@ -304,22 +304,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &109259478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109259475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4760625a809729746bdc5a4ed320be19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 3
-  itemName: M4A1
-  selectedItem: {fileID: 1824002721}
-  icon: {fileID: 21300000, guid: fa44e59f704a99a4395eaf5b9d7e78d8, type: 3}
 --- !u!95 &109259479
 Animator:
   serializedVersion: 7
@@ -424,6 +408,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109259475}
   m_CullTransparentMesh: 1
+--- !u!114 &109259483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109259475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf54b859b55e8341a17c945e7981003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 3
+  itemName: M4A1
+  selectedItem: {fileID: 1824002721}
+  icon: {fileID: 21300000, guid: fe9d1388ec34da84984c15f74936d5df, type: 3}
 --- !u!1 &115985296
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,8 +589,8 @@ GameObject:
   - component: {fileID: 124040693}
   - component: {fileID: 124040692}
   - component: {fileID: 124040691}
-  - component: {fileID: 124040690}
-  - component: {fileID: 124040689}
+  - component: {fileID: 124040696}
+  - component: {fileID: 124040695}
   m_Layer: 5
   m_Name: WeaponWheelButton (3)
   m_TagString: Untagged
@@ -618,99 +618,6 @@ RectTransform:
   m_AnchoredPosition: {x: -63, y: -195}
   m_SizeDelta: {x: 544, y: 543}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &124040689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124040687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 124040690}
-          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
-          m_MethodName: HoverEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 124040690}
-          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
-          m_MethodName: HoverExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 124040690}
-          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
-          m_MethodName: Selected
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 10
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 124040690}
-          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
-          m_MethodName: Deselected
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &124040690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124040687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4760625a809729746bdc5a4ed320be19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 1
-  itemName: Pistol
-  selectedItem: {fileID: 1824002721}
-  icon: {fileID: 21300000, guid: fa44e59f704a99a4395eaf5b9d7e78d8, type: 3}
 --- !u!95 &124040691
 Animator:
   serializedVersion: 7
@@ -815,6 +722,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124040687}
   m_CullTransparentMesh: 1
+--- !u!114 &124040695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124040687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 124040696}
+          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
+          m_MethodName: HoverEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 124040696}
+          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
+          m_MethodName: HoverExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 124040696}
+          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
+          m_MethodName: Selected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 124040696}
+          m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
+          m_MethodName: Deselected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &124040696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124040687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf54b859b55e8341a17c945e7981003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 0
+  itemName: Pistol
+  selectedItem: {fileID: 1824002721}
+  icon: {fileID: 21300000, guid: 8f6eb022a6a151844a38c1bf1a3541b8, type: 3}
 --- !u!1001 &129667750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1434,8 +1434,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 362297427}
-  - component: {fileID: 362297429}
   - component: {fileID: 362297428}
+  - component: {fileID: 362297429}
   m_Layer: 5
   m_Name: WeaponWheel
   m_TagString: Untagged
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 362297426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196ceb98b2458f245b335d3b26302a37, type: 3}
+  m_Script: {fileID: 11500000, guid: 7884a8f26c9976a49b66bb11d73b66c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 362297428}
@@ -1853,8 +1853,8 @@ GameObject:
   - component: {fileID: 544836274}
   - component: {fileID: 544836273}
   - component: {fileID: 544836276}
-  - component: {fileID: 544836277}
   - component: {fileID: 544836278}
+  - component: {fileID: 544836279}
   m_Layer: 5
   m_Name: WeaponWheelButton
   m_TagString: Untagged
@@ -1986,22 +1986,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &544836277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 544836271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4760625a809729746bdc5a4ed320be19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 1
-  itemName: Shotgun
-  selectedItem: {fileID: 1824002721}
-  icon: {fileID: 21300000, guid: fa44e59f704a99a4395eaf5b9d7e78d8, type: 3}
 --- !u!114 &544836278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,7 +2003,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 544836277}
+        - m_Target: {fileID: 544836279}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverEnter
           m_Mode: 1
@@ -2035,7 +2019,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 544836277}
+        - m_Target: {fileID: 544836279}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverExit
           m_Mode: 1
@@ -2051,7 +2035,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 544836277}
+        - m_Target: {fileID: 544836279}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Selected
           m_Mode: 1
@@ -2067,7 +2051,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 544836277}
+        - m_Target: {fileID: 544836279}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Deselected
           m_Mode: 1
@@ -2079,6 +2063,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &544836279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544836271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf54b859b55e8341a17c945e7981003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 1
+  itemName: Shotgun
+  selectedItem: {fileID: 1824002721}
+  icon: {fileID: 21300000, guid: fa44e59f704a99a4395eaf5b9d7e78d8, type: 3}
 --- !u!1 &580399268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,8 +2308,8 @@ GameObject:
   - component: {fileID: 628664471}
   - component: {fileID: 628664470}
   - component: {fileID: 628664469}
-  - component: {fileID: 628664468}
   - component: {fileID: 628664467}
+  - component: {fileID: 628664473}
   m_Layer: 5
   m_Name: WeaponWheelButton (1)
   m_TagString: Untagged
@@ -2354,7 +2354,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 628664468}
+        - m_Target: {fileID: 628664473}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverEnter
           m_Mode: 1
@@ -2370,7 +2370,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 628664468}
+        - m_Target: {fileID: 628664473}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: HoverExit
           m_Mode: 1
@@ -2386,7 +2386,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 628664468}
+        - m_Target: {fileID: 628664473}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Selected
           m_Mode: 1
@@ -2402,7 +2402,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 628664468}
+        - m_Target: {fileID: 628664473}
           m_TargetAssemblyTypeName: WeaponWheelButtonController, Assembly-CSharp
           m_MethodName: Deselected
           m_Mode: 1
@@ -2414,22 +2414,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &628664468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628664465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4760625a809729746bdc5a4ed320be19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 2
-  itemName: Rocket Launcher
-  selectedItem: {fileID: 1824002721}
-  icon: {fileID: 21300000, guid: fa44e59f704a99a4395eaf5b9d7e78d8, type: 3}
 --- !u!95 &628664469
 Animator:
   serializedVersion: 7
@@ -2534,6 +2518,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628664465}
   m_CullTransparentMesh: 1
+--- !u!114 &628664473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628664465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf54b859b55e8341a17c945e7981003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 2
+  itemName: Rocket Launcher
+  selectedItem: {fileID: 1824002721}
+  icon: {fileID: 21300000, guid: a6b81d4ade687c44793a6049a1785867, type: 3}
 --- !u!1001 &645748718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4617,10 +4617,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 847263852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 452, y: -412}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 298.54834, y: -412.27}
+  m_SizeDelta: {x: -1513.0968, y: -935.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1824002721
 MonoBehaviour:
