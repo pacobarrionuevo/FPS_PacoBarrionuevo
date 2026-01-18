@@ -1,3 +1,59 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class WeaponWheelController : MonoBehaviour { public Animator anim; private bool weaponWheelSelected = false; public Image selectedItem; public Sprite noImage; public static int weaponId; public void Update() { if (Input.GetKeyDown(KeyCode.Q)) { weaponWheelSelected = !weaponWheelSelected; } if (weaponWheelSelected) { anim.SetBool("OpenWeaponWheel", true); Cursor.lockState = CursorLockMode.None; Cursor.visible = true; } else { anim.SetBool("OpenWeaponWheel", false); } switch (weaponId) { case 0: Debug.Log("Pistol"); break; case 1: Debug.Log("Shotgun"); break; case 2: Debug.Log("Rocket Launcher"); break; case 3: Debug.Log("M4A1"); break; default: selectedItem.sprite = noImage; break; } } }
+public class WeaponWheelController : MonoBehaviour 
+{ 
+    public Animator anim;
+    public Image selectedItem;
+    public Sprite noImage;
+    public static int weaponId;
+    [SerializeField] private PlayerWeaponSwitcher switcher;
+
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            OpenWheel();
+        }
+        else
+        {
+            CloseWheel();
+        }
+
+        switch (weaponId)
+        {
+            case 0:
+                switcher.SelectWeaponFromWheel(0);
+                break;
+
+            case 1:
+                switcher.SelectWeaponFromWheel(1);
+                break;
+
+            case 2:
+                switcher.SelectWeaponFromWheel(2);
+                break;
+
+            case 3:
+                switcher.SelectWeaponFromWheel(3);
+                break;
+
+            default:
+                selectedItem.sprite = noImage;
+                break;
+        }
+    }
+
+    private void OpenWheel()
+    {
+        anim.SetBool("OpenWeaponWheel", true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void CloseWheel()
+    {
+        anim.SetBool("OpenWeaponWheel", false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+}

@@ -1503,6 +1503,7 @@ MonoBehaviour:
   anim: {fileID: 362297428}
   selectedItem: {fileID: 1824002721}
   noImage: {fileID: 21300000, guid: eefc725436176a44686691746b967d5d, type: 3}
+  switcher: {fileID: 1518405626}
 --- !u!1 &390039269
 GameObject:
   m_ObjectHideFlags: 0
