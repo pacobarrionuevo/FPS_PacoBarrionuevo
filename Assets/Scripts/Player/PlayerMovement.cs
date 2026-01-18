@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
     private CharacterController characterController;
+    private Vector3 characterVelocity;
 
     private bool canMove = true;
 
@@ -41,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     // Variables for dashing
     [Header("Stamina Bar")]
-    private float maxStamina = 100f;
-    private float staminaDrainRate = 50f;
-    private float staminaRegenRate = 25f;
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float staminaDrainRate;
+    [SerializeField] private float staminaRegenRate;
     private float currentStamina;
     private bool isDashing = false;
     [SerializeField] public float dashSpeed;
@@ -110,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
 
-        Vector3 characterVelocity = transform.right * moveX * walkSpeed + transform.forward * moveZ * walkSpeed;
+        characterVelocity = transform.right * moveX * walkSpeed + transform.forward * moveZ * walkSpeed;
 
         if (characterController.isGrounded)
         {
@@ -180,19 +181,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            StartCoroutine(Dash());
+            if (currentStamina > 48)
+            {
+                StartCoroutine(Dash());
+            }
         }
     }
 
     private IEnumerator Dash()
     {
+        isDashing = true;
         float startTime = Time.time;
 
         while (Time.time < startTime + dashTime)
         {
-            characterController.Move(moveDirection * dashSpeed * Time.deltaTime);
+            characterController.Move(dashSpeed * Time.deltaTime * characterVelocity);
             yield return null;
         }
+        isDashing = false;
     }
 
     /// <summary>

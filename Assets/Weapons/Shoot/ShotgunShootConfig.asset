@@ -19,9 +19,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 385
   fireRate: 1
-  recoilRecoverySpeed: 2
+  recoilRecoverySpeed: 8
   maxSpreadTime: 0.5
   bulletsPerShot: 8
   bulletSpreadType: 1
-  Spread: {x: 0.15, y: 0.15, z: 0.15}
-  MinSpread: {x: 0.1, y: 0.1, z: 0.1}
+  Spread: {x: 0.1, y: 0.1, z: 0.1}
+  MinSpread: {x: 0.05, y: 0.05, z: 0.05}

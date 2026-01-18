@@ -1,29 +1,52 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 public class PlayerWeaponSelector : MonoBehaviour
 {
-    [SerializeField] public WeaponType weapon;
+    [Header("References")]
     [SerializeField] public Transform weaponParent;
+
+    [Header("All available weapons")]
     [SerializeField] public List<WeaponScriptableObject> weapons;
 
-    [Space]
     [Header("Runtime filled")]
     public WeaponScriptableObject activeWeapon;
 
+    private PlayerWeaponSwitcher weaponSwitcher;
+
+    private void Awake()
+    {
+        weaponSwitcher = GetComponentInChildren<PlayerWeaponSwitcher>();
+
+        if (weaponSwitcher == null)
+        {
+            Debug.LogError("PlayerWeaponSwitcher not found on object.");
+        }
+    }
+
     private void Start()
     {
-        WeaponScriptableObject wp = weapons.Find(wp => wp.type == weapon);
+        UpdateActiveWeapon();
+    }
 
-        if (wp == null)
+    public void UpdateActiveWeapon()
+    {
+        int index = weaponSwitcher.GetSelectedWeaponIndex();
+
+        if (index < 0 || index >= weapons.Count)
         {
-            Debug.LogError($"No WeaponScriptableObject found for WeaponType: {wp}");
+            Debug.LogError("Invalid weapon index.");
             return;
         }
 
-        activeWeapon = wp;
-        wp.Spawn(weaponParent, this);
+        activeWeapon = weapons[index];
+
+        Debug.Log("Active weapon changed to: " + activeWeapon.name_);
+    }
+
+    public WeaponScriptableObject GetActiveWeapon()
+    {
+        return activeWeapon;
     }
 }
