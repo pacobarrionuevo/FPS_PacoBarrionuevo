@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class PrefabManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class PrefabManager : MonoBehaviour
     public GameObject powerup;
     public static PrefabManager prefabManager;
     private Tweener tween;
+    public bool isInfiniteAmmoActive = false;
 
     public void Awake()
     {
@@ -30,6 +32,24 @@ public class PrefabManager : MonoBehaviour
         }
 
         Destroy(other.gameObject);
+    }
+
+    public IEnumerator InfiniteAmmo(WeaponScriptableObject weaponScriptableObject, Collider other)
+    {
+        isInfiniteAmmoActive = true;
+        AudioManager.Instance.PlayReloadAmmoSound();
+        if (powerup != null)
+        {
+            DOTween.Kill(powerup.transform);
+        }
+
+        Destroy(other.gameObject);
+        weaponScriptableObject.currentAmmo = 10000;
+        weaponScriptableObject.shootConfig.fireRate /= 3;
+        yield return new WaitForSeconds(10f);
+        isInfiniteAmmoActive = false;
+        weaponScriptableObject.currentAmmo = weaponScriptableObject.maxAmmo;
+        weaponScriptableObject.shootConfig.fireRate *= 3;
     }
 
     public void RotateObject()

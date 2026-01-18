@@ -17,9 +17,14 @@ public class PlayerAction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("AmmoClip"))
+        if (other.CompareTag("AmmoClip") && !PrefabManager.prefabManager.isInfiniteAmmoActive)
         {
             PrefabManager.prefabManager.ReloadAmmo(weaponScriptableObject, other);
+        }
+
+        if (other.CompareTag("InfiniteAmmo"))
+        {
+            StartCoroutine(PrefabManager.prefabManager.InfiniteAmmo(weaponScriptableObject, other));
         }
     }
 }
