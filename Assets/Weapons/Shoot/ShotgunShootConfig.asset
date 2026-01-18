@@ -19,7 +19,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 385
   fireRate: 1
-  recoilRecoverySpeed: 4
+  recoilRecoverySpeed: 2
   maxSpreadTime: 0.5
   bulletsPerShot: 8
   bulletSpreadType: 1
