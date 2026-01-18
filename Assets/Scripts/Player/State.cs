@@ -2,5 +2,5 @@
 {
     Normal,
     HookshootThrown,
-    HookshootFlyingPlayer,
+    HookshootFlyingPlayer
 }

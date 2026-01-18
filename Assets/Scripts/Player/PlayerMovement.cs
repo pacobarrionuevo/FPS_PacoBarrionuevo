@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -38,6 +39,18 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 hookshotPosition;
     private float hookshotSize;
 
+    // Variables for dashing
+    [Header("Stamina Bar")]
+    private float maxStamina = 100f;
+    private float staminaDrainRate = 50f;
+    private float staminaRegenRate = 25f;
+    private float currentStamina;
+    private bool isDashing = false;
+    [SerializeField] public float dashSpeed;
+    [SerializeField] public float dashTime;
+
+    //Reference to the slider
+    [SerializeField] private Slider staminaBar;
 
     private void Awake()
     {
@@ -55,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         state = State.Normal;
         hookshotTransform.gameObject.SetActive(false);
+
+        //Initialize StaminaBar to Max
+        currentStamina = maxStamina;
+        if (staminaBar != null)
+        {
+            staminaBar.maxValue = maxStamina;
+            staminaBar.value = currentStamina;
+        }
     }
 
     void Update()
@@ -67,12 +88,15 @@ public class PlayerMovement : MonoBehaviour
                 Movement();
                 Crouch();
                 HandleHookshotStart();
+                TryToDash();
+                HandleStamina();
                 break;
             case State.HookshootThrown:
                 HandleHookshotThrow();
                 LookAround();
                 Movement();
                 Crouch();
+                HandleStamina();
                 break;
             case State.HookshootFlyingPlayer:
                 HandleHookshotMovement();
@@ -150,6 +174,53 @@ public class PlayerMovement : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+    }
+
+    private void TryToDash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + dashTime)
+        {
+            characterController.Move(moveDirection * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Handle Stamina Bar
+    /// </summary>
+    private void HandleStamina()
+    {
+        //Using Stamina
+        if (isDashing && currentStamina > 0)
+        {
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+
+            //if totally used
+            if (currentStamina <= 0)
+            {
+                currentStamina = 0;
+                isDashing = false;
+            }
+        }
+        //Regenerate Stamins
+        else if (!isDashing && currentStamina < maxStamina)
+        {
+            currentStamina += staminaRegenRate * Time.deltaTime;
+            currentStamina = Mathf.Min(currentStamina, maxStamina);
+        }
+
+        //Update Stamina bar
+        staminaBar.value = currentStamina;
     }
 
     private void HandleHookshotStart()
