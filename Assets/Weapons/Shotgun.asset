@@ -15,10 +15,10 @@ MonoBehaviour:
   type: 1
   name_: Shotgun
   modelPrefab: {fileID: 6545413020415891368, guid: caaea5e491aedda4396b8c446a60057f, type: 3}
-  spawnPoint: {x: 0.64, y: -0.6, z: 0.71}
+  spawnPoint: {x: 0.75, y: -0.6, z: 0.5}
   spawnRotation: {x: 0, y: -10.3, z: 0}
   shootConfig: {fileID: 11400000, guid: d1ef03160e2a00b469fb416b573f542b, type: 2}
   trailConfig: {fileID: 11400000, guid: 4b05bff0ce22b9c43ad3d7a36431f601, type: 2}
   damageConfig: {fileID: 11400000, guid: ac1f3b34ba8d618489b0f8df71a40b71, type: 2}
   maxAmmo: 30
-  currentAmmo: 29
+  currentAmmo: 26

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -25,6 +26,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canMove = true;
 
+    // Variables needed for hook shoot
+    private float characterVelocityY;
+    private const float NORMAL_FOV = 60f;
+    private const float HOOKSHOT_FOV = 100f;
+    [SerializeField] private Transform hookshotTransform;
+    private Vector3 characterVelocityMomentum;
+    private CameraFov cameraFov;
+    private ParticleSystem speedLinesParticleSystem;
+    private State state;
+    private Vector3 hookshotPosition;
+    private float hookshotSize;
+
+
     private void Awake()
     {
         initialWalkSpeed = walkSpeed;
@@ -34,45 +48,80 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        playerCamera = transform.Find("Main Camera").GetComponent<Camera>();
+        cameraFov = playerCamera.GetComponent<CameraFov>();
+        speedLinesParticleSystem = transform.Find("Main Camera").Find("SpeedLinesParticleSystem").GetComponent<ParticleSystem>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        state = State.Normal;
+        hookshotTransform.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        Movement();
-
-        Crouch();
-
-        LookAround();
+        switch (state)
+        {
+            default:
+            case State.Normal:
+                LookAround();
+                Movement();
+                Crouch();
+                HandleHookshotStart();
+                break;
+            case State.HookshootThrown:
+                HandleHookshotThrow();
+                LookAround();
+                Movement();
+                Crouch();
+                break;
+            case State.HookshootFlyingPlayer:
+                HandleHookshotMovement();
+                LookAround();
+                break;
+        }
     }
 
     private void Movement()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveZ = Input.GetAxisRaw("Vertical");
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        Vector3 characterVelocity = transform.right * moveX * walkSpeed + transform.forward * moveZ * walkSpeed;
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (characterController.isGrounded)
         {
-            moveDirection.y = jumpPower;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
+            characterVelocityY = 0f;
+            // Jump
+            if (TestInputJump())
+            {
+                characterVelocityY = jumpPower;
+            }
         }
 
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+        // Apply gravity to the velocity
+        float gravityDownForce = -40f;
+        characterVelocityY += gravityDownForce * Time.deltaTime;
 
-        characterController.Move(moveDirection * Time.deltaTime);
+
+        // Apply Y velocity to move vector
+        characterVelocity.y = characterVelocityY;
+
+        // Apply momentum
+        characterVelocity += characterVelocityMomentum;
+
+        // Move Character Controller
+        characterController.Move(characterVelocity * Time.deltaTime);
+
+        // Dampen momentum
+        if (characterVelocityMomentum.magnitude > 0f)
+        {
+            float momentumDrag = 3f;
+            characterVelocityMomentum -= characterVelocityMomentum * momentumDrag * Time.deltaTime;
+            if (characterVelocityMomentum.magnitude < .0f)
+            {
+                characterVelocityMomentum = Vector3.zero;
+            }
+        }
     }
 
     private void Crouch()
@@ -101,5 +150,93 @@ public class PlayerMovement : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+    }
+
+    private void HandleHookshotStart()
+    {
+        if (TestInputDownHookshot())
+        {
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit raycastHit))
+            {
+                // Hit something
+                hookshotPosition = raycastHit.point;
+                hookshotSize = 0f;
+                hookshotTransform.gameObject.SetActive(true);
+                hookshotTransform.localScale = Vector3.zero;
+                state = State.HookshootThrown;
+            }
+        }
+    }
+
+    private void HandleHookshotThrow()
+    {
+        hookshotTransform.LookAt(hookshotPosition);
+
+        float hookshotThrowSpeed = 100f;
+        hookshotSize += hookshotThrowSpeed * Time.deltaTime;
+        hookshotTransform.localScale = new Vector3(1, 1, hookshotSize);
+
+        if (hookshotSize >= Vector3.Distance(transform.position, hookshotPosition))
+        {
+            state = State.HookshootFlyingPlayer;
+            cameraFov.SetCameraFov(HOOKSHOT_FOV);
+            speedLinesParticleSystem.Play();
+        }
+    }
+
+    private void HandleHookshotMovement()
+    {
+        hookshotTransform.LookAt(hookshotPosition);
+
+        Vector3 hookshotDir = (hookshotPosition - transform.position).normalized;
+
+        float hookshotSpeedMin = 10f;
+        float hookshotSpeedMax = 20f;
+        float hookshotSpeed = Mathf.Clamp(Vector3.Distance(transform.position, hookshotPosition), hookshotSpeedMin, hookshotSpeedMax);
+        float hookshotSpeedMultiplier = 2f;
+
+        // Move Character Controller
+        characterController.Move(hookshotDir * hookshotSpeed * hookshotSpeedMultiplier * Time.deltaTime);
+
+        float reachedHookshotPositionDistance = 1f;
+        if (Vector3.Distance(transform.position, hookshotPosition) < reachedHookshotPositionDistance)
+        {
+            // Reached Hookshot Position
+            StopHookshot();
+        }
+
+        if (TestInputDownHookshot())
+        {
+            // Cancel Hookshot
+            StopHookshot();
+        }
+
+        if (TestInputJump())
+        {
+            // Cancelled with Jump
+            float momentumExtraSpeed = 4f;
+            characterVelocityMomentum = hookshotDir * hookshotSpeed * momentumExtraSpeed;
+            characterVelocityMomentum += Vector3.up * jumpPower;
+            StopHookshot();
+        }
+    }
+    private void StopHookshot()
+    {
+        state = State.Normal;
+        //ResetGravityEffect();
+        hookshotTransform.gameObject.SetActive(false);
+        cameraFov.SetCameraFov(NORMAL_FOV);
+        speedLinesParticleSystem.Stop();
+    }
+
+
+    private bool TestInputDownHookshot()
+    {
+        return Mouse.current.rightButton.isPressed;
+    }
+
+    private bool TestInputJump()
+    {
+        return Input.GetButton("Jump");
     }
 }
