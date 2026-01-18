@@ -14,14 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float runSpeed;
     private float initialRunSpeed;
     [SerializeField] public float jumpPower;
-    [SerializeField] public float gravity;
     [SerializeField] public float lookSpeed;
     [SerializeField] public float lookXLimit;
     [SerializeField] public float defaultHeight;
     [SerializeField] public float crouchHeight;
     [SerializeField] public float crouchSpeed;
 
-    private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
     private CharacterController characterController;
     private Vector3 characterVelocity;

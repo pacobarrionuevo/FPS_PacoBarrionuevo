@@ -18,10 +18,10 @@ MonoBehaviour:
   HitMask:
     serializedVersion: 2
     m_Bits: 385
-  fireRate: 0.2
+  fireRate: 0.3
   recoilRecoverySpeed: 1
   maxSpreadTime: 1
   bulletsPerShot: 1
-  bulletSpreadType: 1
+  bulletSpreadType: 0
   Spread: {x: 0.03, y: 0.03, z: 0.03}
   MinSpread: {x: 0, y: 0, z: 0}

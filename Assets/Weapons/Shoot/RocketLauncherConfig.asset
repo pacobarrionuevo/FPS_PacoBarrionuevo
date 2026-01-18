@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d72f1f569da2594b8dedb4eb9c234de, type: 3}
   m_Name: RocketLauncherConfig
   m_EditorClassIdentifier: 
-  isHitscan: 0
-  bulletPrefab: {fileID: 2832027802193731642, guid: ca17088066793e4488d05e5cbeedb84d, type: 3}
+  isHitscan: 1
+  bulletPrefab: {fileID: 0}
   bulletSpawnForce: 1000
   HitMask:
     serializedVersion: 2
@@ -21,5 +21,7 @@ MonoBehaviour:
   fireRate: 3
   recoilRecoverySpeed: 1
   maxSpreadTime: 1
+  bulletsPerShot: 1
   bulletSpreadType: 0
   Spread: {x: 0.1, y: 0.1, z: 0.1}
+  MinSpread: {x: 0, y: 0, z: 0}

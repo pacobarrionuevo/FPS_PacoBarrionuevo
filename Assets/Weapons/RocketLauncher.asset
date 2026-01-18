@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   name_: RocketLauncher
-  modelPrefab: {fileID: 2893870274590104011, guid: bd5cf643a1274304fa3320d81cf9b312, type: 3}
-  spawnPoint: {x: 0.44, y: -0.2, z: 0.27}
-  spawnRotation: {x: 0, y: 180, z: 0}
+  modelPrefab: {fileID: 4685790036102911697, guid: 9994a75873b2cce44a2e36f1a1598ece, type: 3}
+  spawnPoint: {x: 0.9204994, y: 0.3699563, z: -0.4531531}
+  spawnRotation: {x: 0, y: -10.41, z: 0}
   shootConfig: {fileID: 11400000, guid: 204fd7c4521145e4db1ac445d6f162bb, type: 2}
   trailConfig: {fileID: 11400000, guid: 1ac5d22074cf9774698e3400e120ec8e, type: 2}
   damageConfig: {fileID: 11400000, guid: 5c6752e51dd3d6e4da0e6f002bea94e7, type: 2}
   maxAmmo: 10
-  currentAmmo: 8
+  currentAmmo: 3

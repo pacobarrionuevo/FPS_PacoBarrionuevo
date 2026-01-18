@@ -3282,7 +3282,6 @@ MonoBehaviour:
   walkSpeed: 8
   runSpeed: 9
   jumpPower: 12
-  gravity: 25
   lookSpeed: 2
   lookXLimit: 80
   defaultHeight: 2
@@ -3337,6 +3336,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
   - {fileID: 11400000, guid: a093c97f1d5b33241abf7301bc61ebe8, type: 2}
   - {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
+  - {fileID: 11400000, guid: 040429c274e81874090f8441154cdec2, type: 2}
   activeWeapon: {fileID: 0}
 --- !u!114 &942575806
 MonoBehaviour:
@@ -4123,7 +4123,7 @@ Transform:
   m_GameObject: {fileID: 1518405624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: -0.1, z: 0.42}
+  m_LocalPosition: {x: 0.4, y: -0.353, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4145,8 +4145,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cad0d8ae209f1c4b8761ce1e742230c, type: 2}
   - {fileID: 11400000, guid: a093c97f1d5b33241abf7301bc61ebe8, type: 2}
   - {fileID: 11400000, guid: 153d28c0fd0bc224492b140c4e780a74, type: 2}
+  - {fileID: 11400000, guid: 040429c274e81874090f8441154cdec2, type: 2}
   weaponParent: {fileID: 1518405625}
-  keys: 310000003200000033000000
+  keys: 31000000320000003300000034000000
   switchTime: 0.25
 --- !u!1001 &1628600209
 PrefabInstance:
