@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 public class WeaponWheelButtonController : MonoBehaviour 
-{ 
+{
+    public static WeaponWheelButtonController wwbc;
     public int Id; 
     private Animator anim;
     public string itemName;
@@ -12,6 +13,7 @@ public class WeaponWheelButtonController : MonoBehaviour
     void Start() 
     { 
         anim = GetComponent<Animator>();
+        wwbc = this;
     } 
     void Update() 
     {

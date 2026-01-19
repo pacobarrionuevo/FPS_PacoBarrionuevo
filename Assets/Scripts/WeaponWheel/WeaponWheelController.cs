@@ -1,12 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 public class WeaponWheelController : MonoBehaviour 
-{ 
+{
+    public static WeaponWheelController wwc;
     public Animator anim;
     public Image selectedItem;
     public Sprite noImage;
     public static int weaponId;
     [SerializeField] private PlayerWeaponSwitcher switcher;
+
+    private void Awake()
+    {
+        wwc = this;
+    }
 
     public void Update()
     {

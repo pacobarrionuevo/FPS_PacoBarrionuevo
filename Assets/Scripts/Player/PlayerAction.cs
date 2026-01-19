@@ -1,11 +1,12 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAction : MonoBehaviour
 {
     [SerializeField] public PlayerWeaponSelector weaponSelector;
-    [SerializeField] public WeaponScriptableObject weaponScriptableObject;
+    [SerializeField] public List<WeaponScriptableObject> weapons;
 
     void Update()
     {
@@ -19,12 +20,12 @@ public class PlayerAction : MonoBehaviour
     {
         if (other.CompareTag("AmmoClip") && !PrefabManager.prefabManager.isInfiniteAmmoActive)
         {
-            PrefabManager.prefabManager.ReloadAmmo(weaponScriptableObject, other);
+            PrefabManager.prefabManager.ReloadAmmo(weapons[WeaponWheelButtonController.wwbc.Id], other);
         }
 
         if (other.CompareTag("InfiniteAmmo"))
         {
-            StartCoroutine(PrefabManager.prefabManager.InfiniteAmmo(weaponScriptableObject, other));
+            StartCoroutine(PrefabManager.prefabManager.InfiniteAmmo(weapons[WeaponWheelButtonController.wwbc.Id], other));
         }
     }
 }
