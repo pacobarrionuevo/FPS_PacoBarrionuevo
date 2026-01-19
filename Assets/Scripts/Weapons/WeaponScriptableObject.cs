@@ -93,7 +93,22 @@ public class WeaponScriptableObject : ScriptableObject
 
                 if (currentAmmo > 3)
                 {
-                    AudioManager.Instance.PlayPistolShootingSound();
+                    switch (type)
+                    {
+                        case WeaponType.Pistol:
+                            AudioManager.Instance.PlayPistolShootingSound();
+                            break;
+                        case WeaponType.M4A1:
+                            AudioManager.Instance.PlayRifleShootingSound();
+                            break;
+                        case WeaponType.Shotgun:
+                            AudioManager.Instance.PlayShotgunShootingSound();
+                            break;
+                        case WeaponType.RocketLauncher:
+                            AudioManager.Instance.PlayRocketLauncherShootingSound();
+                            break;
+                    }
+                    
                 }
                 else
                 {

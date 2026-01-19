@@ -5,6 +5,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [SerializeField] private AudioSource pistolSound;
+    [SerializeField] private AudioSource rocketLauncherSound;
+    [SerializeField] private AudioSource shotgunSound;
+    [SerializeField] private AudioSource rifleSound;
     [SerializeField] private AudioSource pistolEmptyingSound;
     [SerializeField] private AudioSource emptyGun;
     [SerializeField] private AudioSource reloadAmmo;
@@ -28,6 +31,21 @@ public class AudioManager : MonoBehaviour
     public void PlayPistolShootingSound()
     {
         pistolSound.Play();
+    }
+
+    public void PlayRocketLauncherShootingSound()
+    {
+        rocketLauncherSound.Play();
+    }
+
+    public void PlayRifleShootingSound()
+    {
+        rifleSound.Play();
+    }
+
+    public void PlayShotgunShootingSound()
+    {
+        shotgunSound.Play();
     }
 
     public void PlayPistolEmptyingSound()
