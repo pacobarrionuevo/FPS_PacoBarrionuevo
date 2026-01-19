@@ -7,7 +7,8 @@ public class WeaponWheelButtonController : MonoBehaviour
     public string itemName;
     public Image selectedItem;
     private bool selected = false;
-    public Sprite icon; 
+    public Sprite icon;
+    public bool isHovered = false;
     void Start() 
     { 
         anim = GetComponent<Animator>();
@@ -22,10 +23,12 @@ public class WeaponWheelButtonController : MonoBehaviour
     public void HoverEnter() 
     {
         anim.SetBool("Hover", true);
+        isHovered = true;
     }
     public void HoverExit() 
     {
         anim.SetBool("Hover", false);
+        isHovered = false;
     }
     public void Selected() 
     {
