@@ -4,8 +4,11 @@ using UnityEngine;
 public class HUDController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] public TextMeshProUGUI controlsText;
 
     private PlayerWeaponSwitcher weaponSwitcher;
+
+    private bool ControlsPanel = false;
 
     private void Start()
     {
@@ -18,6 +21,21 @@ public class HUDController : MonoBehaviour
     private void Update()
     {
         UpdateAmmoHUD();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ControlsPanel = !ControlsPanel;
+        }
+
+        if (ControlsPanel)
+        {
+            controlsText.gameObject.SetActive(true);
+        }
+        else
+        {
+            controlsText.gameObject.SetActive(false);
+
+        }
     }
 
     private void UpdateAmmoHUD()
