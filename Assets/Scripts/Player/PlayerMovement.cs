@@ -189,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
+        AudioManager.Instance.PlayDashSound();
         float startTime = Time.time;
 
         while (Time.time < startTime + dashTime)
@@ -250,6 +251,7 @@ public class PlayerMovement : MonoBehaviour
         float hookshotThrowSpeed = 100f;
         hookshotSize += hookshotThrowSpeed * Time.deltaTime;
         hookshotTransform.localScale = new Vector3(1, 1, hookshotSize);
+        AudioManager.Instance.PlayHookSound();
 
         if (hookshotSize >= Vector3.Distance(transform.position, hookshotPosition))
         {

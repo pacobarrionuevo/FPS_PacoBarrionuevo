@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource pistolEmptyingSound;
     [SerializeField] private AudioSource emptyGun;
     [SerializeField] private AudioSource reloadAmmo;
+    [SerializeField] private AudioSource hoverSound;
+    [SerializeField] private AudioSource dashSound;
+    [SerializeField] private AudioSource hookSound;
 
     private void Awake()
     {
@@ -58,11 +61,23 @@ public class AudioManager : MonoBehaviour
         emptyGun.Play();
     }
 
-    /// <summary>
-    /// Sound produced when you pick up an ammo clip
-    /// </summary>
     public void PlayReloadAmmoSound()
     {
         reloadAmmo.Play();
+    }
+
+    public void PlayHoverSound()
+    {
+        hoverSound.Play();
+    }
+
+    public void PlayDashSound()
+    {
+        dashSound.Play();
+    }
+
+    public void PlayHookSound()
+    {
+        hookSound.Play();
     }
 }

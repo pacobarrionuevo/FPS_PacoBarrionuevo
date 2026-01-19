@@ -25,6 +25,7 @@ public class WeaponWheelButtonController : MonoBehaviour
     public void HoverEnter() 
     {
         anim.SetBool("Hover", true);
+        AudioManager.Instance.PlayHoverSound();
         isHovered = true;
     }
     public void HoverExit() 
