@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHookshotStart()
     {
-        if (TestInputDownHookshot())
+        if (TestInputDownHookshot() && PlayerWeaponSelector.pws.IsActiveWeaponShotgun())
         {
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit raycastHit))
             {

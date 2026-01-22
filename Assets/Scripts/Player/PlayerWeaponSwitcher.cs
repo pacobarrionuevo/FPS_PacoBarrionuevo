@@ -3,13 +3,19 @@ public class PlayerWeaponSwitcher : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private WeaponScriptableObject[] weaponDefinitions; 
+
     [SerializeField] private Transform weaponParent; 
+
     [Header("Keys")]
     [SerializeField] private KeyCode[] keys; 
+
     [Header("Settings")]
     [SerializeField] private float switchTime = 0.25f; 
-    private PlayerWeaponSelector selector; private Transform[] weapons; 
-    private int selectedWeapon; private float timeSinceLastSwitch; 
+
+    private PlayerWeaponSelector selector; private Transform[] weapons;
+    
+    private int selectedWeapon; 
+    private float timeSinceLastSwitch; 
 
     private void Start() { 
         selector = GetComponentInParent<PlayerWeaponSelector>(); 
@@ -58,8 +64,16 @@ public class PlayerWeaponSwitcher : MonoBehaviour
         selector?.UpdateActiveWeapon(); timeSinceLastSwitch = 0f; 
     }
 
-    public WeaponScriptableObject GetActiveWeapon() { return weaponDefinitions[selectedWeapon]; }
-    public int GetSelectedWeaponIndex() { return selectedWeapon; }
+    public WeaponScriptableObject GetActiveWeapon() 
+    { 
+        return weaponDefinitions[selectedWeapon]; 
+    
+    }
+
+    public int GetSelectedWeaponIndex() 
+    { 
+        return selectedWeapon; 
+    }
 
     public void SelectWeaponFromWheel(int index)
     {

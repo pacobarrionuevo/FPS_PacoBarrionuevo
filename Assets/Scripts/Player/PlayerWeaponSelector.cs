@@ -5,21 +5,34 @@ public class PlayerWeaponSelector : MonoBehaviour
 { 
     [Header("References")]
     [SerializeField] public Transform weaponParent; 
+
     [Header("All available weapons")]
     [SerializeField] public List<WeaponScriptableObject> weapons; 
+
     [Header("Runtime filled")] 
     public WeaponScriptableObject activeWeapon; 
-    private PlayerWeaponSwitcher weaponSwitcher; 
 
-    private void Awake() {
+    private PlayerWeaponSwitcher weaponSwitcher;
+
+    public static PlayerWeaponSelector pws;
+
+    private void Awake() 
+    {
         weaponSwitcher = GetComponentInChildren<PlayerWeaponSwitcher>();
-        if (weaponSwitcher == null) {
+
+        if (weaponSwitcher == null) 
+        {
             Debug.LogError("PlayerWeaponSwitcher not found on object."); 
-        } 
+        }
+
+        pws = this;
     } 
-    private void Start() {
+
+    private void Start() 
+    {
         UpdateActiveWeapon();
     } 
+
     public void UpdateActiveWeapon() 
     { 
         int index = weaponSwitcher.GetSelectedWeaponIndex();
@@ -30,4 +43,14 @@ public class PlayerWeaponSelector : MonoBehaviour
         }
         activeWeapon = weapons[index]; 
     } 
-    public WeaponScriptableObject GetActiveWeapon() { return activeWeapon; } }
+
+    public WeaponScriptableObject GetActiveWeapon()
+    { 
+        return activeWeapon; 
+    } 
+
+    public bool IsActiveWeaponShotgun()
+    {
+        return (activeWeapon.type.Equals(WeaponType.Shotgun));
+    }
+}

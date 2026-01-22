@@ -53,13 +53,11 @@ public class WeaponWheelController : MonoBehaviour
     {
         anim.SetBool("OpenWeaponWheel", true);
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     private void CloseWheel()
     {
         anim.SetBool("OpenWeaponWheel", false);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 }
