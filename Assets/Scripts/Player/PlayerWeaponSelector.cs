@@ -53,4 +53,19 @@ public class PlayerWeaponSelector : MonoBehaviour
     {
         return (activeWeapon.type.Equals(WeaponType.Shotgun));
     }
+
+    public bool IsActiveWeaponPistol()
+    {
+        return (activeWeapon.type.Equals(WeaponType.Pistol));
+    }
+
+    public bool IsActiveWeaponRifle()
+    {
+        return (activeWeapon.type.Equals(WeaponType.M4A1));
+    }
+
+    public bool IsActiveWeaponRocketLauncher()
+    {
+        return (activeWeapon.type.Equals(WeaponType.RocketLauncher));
+    }
 }

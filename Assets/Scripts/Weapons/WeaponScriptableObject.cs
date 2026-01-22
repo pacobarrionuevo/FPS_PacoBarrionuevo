@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Weapon", order = 0)]
 public class WeaponScriptableObject : ScriptableObject
@@ -33,8 +34,11 @@ public class WeaponScriptableObject : ScriptableObject
     private ObjectPool<TrailRenderer> trailPool;
     private ObjectPool<Bullet> bulletPool;
 
+    public static WeaponScriptableObject wso;
+
     public void Awake()
     {
+        wso = this;
         currentAmmo = maxAmmo;
         canShoot = true;
     }
@@ -309,5 +313,15 @@ public class WeaponScriptableObject : ScriptableObject
         trail.emitting = false;
         trail.gameObject.SetActive(false);
         trailPool.Release(trail);
+    }
+
+    public void ActivateBulletSpread()
+    {
+        shootConfig.bulletSpreadType = BulletSpreadType.Simple;
+    }
+
+    public void DeactivateBulletSpread()
+    {
+        shootConfig.bulletSpreadType = BulletSpreadType.None;
     }
 }

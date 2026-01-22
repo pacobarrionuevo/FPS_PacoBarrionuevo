@@ -155,12 +155,22 @@ public class PlayerMovement : MonoBehaviour
             walkSpeed = crouchSpeed;
             runSpeed = crouchSpeed;
 
+            if (PlayerWeaponSelector.pws.IsActiveWeaponRifle())
+            {
+                WeaponScriptableObject.wso.DeactivateBulletSpread();
+            }
+            
         }
         else
         {
             characterController.height = defaultHeight;
             walkSpeed = initialWalkSpeed;
             runSpeed = initialRunSpeed;
+
+            if (PlayerWeaponSelector.pws.IsActiveWeaponRifle())
+            {
+                WeaponScriptableObject.wso.ActivateBulletSpread();
+            }
         }
     }
 
