@@ -22,7 +22,7 @@ public class HUDController : MonoBehaviour
     {
         UpdateAmmoHUD();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             ControlsPanel = !ControlsPanel;
         }
